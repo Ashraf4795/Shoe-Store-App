@@ -4,11 +4,17 @@ import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.android.shoestore.R
 import com.example.android.shoestore.base.Result
 import com.example.android.shoestore.feature.login.data.LoginRepository
+import com.example.android.shoestore.feature.login.data.model.User
+import kotlinx.coroutines.*
 
-class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel() {
+class LoginViewModel(
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val loginRepository: LoginRepository
+) : ViewModel() {
 
     private val _loginForm = MutableLiveData<LoginFormState>()
     val loginFormState: LiveData<LoginFormState> = _loginForm
@@ -16,14 +22,39 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
     private val _loginResult = MutableLiveData<LoginResult>()
     val loginResult: LiveData<LoginResult> = _loginResult
 
-    fun login(username: String, password: String) {
-        val result = loginRepository.login(username, password)
+    private val _registerResult = MutableLiveData<LoginResult>()
+    val registerResult: LiveData<LoginResult> = _registerResult
 
-        if (result is Result.Success) {
-            _loginResult.value =
-                LoginResult(success = LoggedInUserView(displayName = result.data.displayName))
-        } else {
-            _loginResult.value = LoginResult(error = R.string.login_failed)
+    fun login(username: String, password: String) {
+        viewModelScope {
+            when (val result = loginRepository.login(username, password)) {
+                is Result.Success -> {
+                    withContext(Dispatchers.Main) {
+                        _loginResult.value =
+                            LoginResult(success = LoggedInUserView(displayName = result.data.userEmail))
+                    }
+                }
+                is Result.Error -> {
+                    withContext(Dispatchers.Main) {
+                        _loginResult.value = LoginResult(error = result.errorId)
+                    }
+                }
+                else -> {}
+            }
+        }
+    }
+
+    fun register(user: User) {
+        viewModelScope {
+            when (val registrationResult = loginRepository.register(user)) {
+                is Result.Success -> {
+                    withContext(Dispatchers.Main) {
+                        _registerResult.value =
+                            LoginResult(success = LoggedInUserView(displayName = registrationResult.data.userEmail))
+                    }
+                }
+                else -> {}
+            }
         }
     }
 
@@ -47,5 +78,16 @@ class LoginViewModel(private val loginRepository: LoginRepository) : ViewModel()
 
     private fun isPasswordValid(password: String): Boolean {
         return password.length > 5
+    }
+
+    private fun viewModelScope(
+        dispatcher: CoroutineDispatcher = this.dispatcher,
+        block: suspend () -> Unit
+    ) {
+        viewModelScope.launch {
+            withContext(dispatcher) {
+                block.invoke()
+            }
+        }
     }
 }

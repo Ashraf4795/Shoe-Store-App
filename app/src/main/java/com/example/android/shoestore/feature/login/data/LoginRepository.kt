@@ -10,7 +10,6 @@ import com.example.android.shoestore.feature.login.data.model.User
 
 class LoginRepository(val dataSource: LoginDataSource) {
 
-    // in-memory cache of the loggedInUser object
     var user: User? = null
         private set
 
@@ -18,8 +17,6 @@ class LoginRepository(val dataSource: LoginDataSource) {
         get() = user != null
 
     init {
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
         user = null
     }
 
@@ -28,10 +25,8 @@ class LoginRepository(val dataSource: LoginDataSource) {
         dataSource.logout()
     }
 
-    fun login(username: String, password: String): Result<User> {
-        // handle login
-        val result = dataSource.login(username, password)
-
+    suspend fun login(userEmail: String, password: String): Result<User> {
+        val result = dataSource.login(User(userEmail = userEmail, userPassword = password))
         if (result is Result.Success) {
             setLoggedInUser(result.data)
         }
@@ -39,9 +34,12 @@ class LoginRepository(val dataSource: LoginDataSource) {
         return result
     }
 
+    suspend fun register(user: User): Result<User> {
+        return dataSource.register(user)
+    }
+
+
     private fun setLoggedInUser(loggedInUser: User) {
         this.user = loggedInUser
-        // If user credentials will be cached in local storage, it is recommended it be encrypted
-        // @see https://developer.android.com/training/articles/keystore
     }
 }
