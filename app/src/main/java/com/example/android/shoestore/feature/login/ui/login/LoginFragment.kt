@@ -126,6 +126,7 @@ class LoginFragment : Fragment() {
     private fun updateUiWithUser(model: LoggedInUserView) {
         val welcome = getString(R.string.welcome) + model.displayName
         Toast.makeText(this.requireActivity(), welcome, Toast.LENGTH_LONG).show()
+        navController.navigate(R.id.action_loginFragment_to_shoeListFragment)
     }
 
 
