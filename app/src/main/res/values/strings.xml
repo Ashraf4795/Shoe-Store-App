@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Shoe Store</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">ahmed.helmy@udacity.com</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Register</string>
+    <string name="welcome">"Welcome, "</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="registration_required">"You Need to register first"</string>
+    <string name="home_item">Home</string>
+    <string name="profile_item">Profile</string>
+    <string name="cart_item">Cart</string>
 </resources>
