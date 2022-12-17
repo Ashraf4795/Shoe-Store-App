@@ -1,5 +1,6 @@
 package com.example.android.shoestore.feature.login.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,23 +14,27 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import com.example.android.shoestore.R
 import com.example.android.shoestore.databinding.FragmentLoginBinding
 import com.example.android.shoestore.feature.login.data.model.User
+import com.example.android.shoestore.feature.onboarding.OnBoardingActivity
 import com.google.android.material.snackbar.Snackbar
 
 class LoginFragment : Fragment() {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: FragmentLoginBinding
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+        navController = findNavController()
         return binding.root
     }
 
@@ -122,6 +127,7 @@ class LoginFragment : Fragment() {
         val welcome = getString(R.string.welcome) + model.displayName
         Toast.makeText(this.requireActivity(), welcome, Toast.LENGTH_LONG).show()
     }
+
 
     private fun registerMessage(message: String) {
         Toast.makeText(this.requireActivity(), "$message registered!", Toast.LENGTH_LONG).show()
