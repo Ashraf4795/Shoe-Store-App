@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -45,6 +46,11 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(binding.navView, navController)
     }
 
+    override fun onStart() {
+        super.onStart()
+        checkLoginState()
+    }
+
     private fun initViews() {
         drawerLayout = binding.drawerLayout
         appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
@@ -58,6 +64,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun checkLoginState() {
+        if (!mainViewModel.isUserLoggedIn()) {
+            navController.popBackStack()
+            navController.navigate(R.id.login_flow)
+        }
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(drawerLayout)

@@ -12,9 +12,6 @@
         android:label="Shoe List"
         tools:layout="@layout/fragment_shoe_list" >
         <action
-            android:id="@+id/action_shoeListFragment_to_login_flow"
-            app:destination="@id/login_flow"/>
-        <action
             android:id="@+id/action_shoeListFragment_to_shoeDetailsFragment"
             app:destination="@id/shoeDetailsFragment" />
     </fragment>
@@ -23,7 +20,7 @@
         <fragment
             android:id="@+id/loginFragment"
             android:name="com.example.android.shoestore.feature.login.ui.login.LoginFragment"
-            android:label="fragment_login"
+            android:label="Login"
             tools:layout="@layout/fragment_login">
             <action
                 android:id="@+id/action_loginFragment_to_onBoardingFragment"
@@ -33,7 +30,7 @@
         <fragment
             android:id="@+id/onBoardingFragment"
             android:name="com.example.android.shoestore.feature.onboarding.OnBoardingFragment"
-            android:label="fragment_on_boarding"
+            android:label="Welcome"
             tools:layout="@layout/fragment_on_boarding">
             <action
                 android:id="@+id/action_onBoardingFragment_to_instructionFragment"
@@ -42,16 +39,12 @@
         <fragment
             android:id="@+id/instructionFragment"
             android:name="com.example.android.shoestore.feature.instruction.InstructionFragment"
-            android:label="fragment_instruction"
+            android:label="Instruction"
             tools:layout="@layout/fragment_instruction" />
-        <action
-            android:id="@+id/action_global_shoeListFragment"
-            app:destination="@id/shoeListFragment"
-            app:popUpTo="@id/login_flow"/>
     </navigation>
     <fragment
         android:id="@+id/shoeDetailsFragment"
         android:name="com.example.android.shoestore.feature.shoe_details.ShoeDetailsFragment"
-        android:label="fragment_shoe_details"
+        android:label="Shoe Details"
         tools:layout="@layout/fragment_shoe_details" />
 </navigation>

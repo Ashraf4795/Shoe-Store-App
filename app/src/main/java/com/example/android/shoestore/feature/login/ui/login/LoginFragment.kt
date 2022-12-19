@@ -29,7 +29,6 @@ class LoginFragment : Fragment() {
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: FragmentLoginBinding
     private lateinit var navController: NavController
-    private lateinit var savedStateHandle: SavedStateHandle
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +42,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initializeViewModel()
 
         initializeObservers(binding.login, binding.username, binding.password, binding.loading)
@@ -141,7 +141,8 @@ class LoginFragment : Fragment() {
             }
             loginResult.success?.let {
                 updateUiWithUser(it)
-                navController.navigate(R.id.action_loginFragment_to_onBoardingFragment)
+                navController.popBackStack()
+                navController.navigate(R.id.shoeListFragment)
             }
         }
 
@@ -170,4 +171,5 @@ class LoginFragment : Fragment() {
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(this.requireActivity(), errorString, Toast.LENGTH_LONG).show()
     }
+
 }

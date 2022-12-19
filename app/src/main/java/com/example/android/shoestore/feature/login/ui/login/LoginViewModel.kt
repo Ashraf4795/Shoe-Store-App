@@ -90,4 +90,8 @@ class LoginViewModel(
             }
         }
     }
+
+    fun isUserLoggedIn() {
+
+    }
 }

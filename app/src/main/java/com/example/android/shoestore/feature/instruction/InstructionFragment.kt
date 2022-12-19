@@ -27,7 +27,6 @@ class InstructionFragment : Fragment() {
         navController = findNavController()
 
         binding.instructionNextButtonId.setOnClickListener {
-            navController.navigate(R.id.action_global_shoeListFragment)
         }
 
         return binding.root

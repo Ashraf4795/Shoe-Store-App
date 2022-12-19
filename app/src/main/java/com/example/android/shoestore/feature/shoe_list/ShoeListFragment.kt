@@ -53,15 +53,9 @@ class ShoeListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
         initObservers()
-        checkLoginState()
         initClickListener()
     }
 
-    private fun checkLoginState() {
-        if (!mainViewModel.isUserLoggedIn()) {
-            navController.navigate(R.id.action_shoeListFragment_to_login_flow)
-        }
-    }
 
     private fun initObservers() {
         mainViewModel.shoeLiveData.observe(this.viewLifecycleOwner) { result ->
@@ -102,7 +96,8 @@ class ShoeListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.logout_item) {
             mainViewModel.logout()
-            navController.navigate(R.id.action_shoeListFragment_to_login_flow)
+            navController.popBackStack()
+            navController.navigate(R.id.login_flow)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -110,11 +105,6 @@ class ShoeListFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.drawer_menu, menu)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        println("")
     }
 
     private fun initMainViewModelFactory() = MainViewModelFactory(
