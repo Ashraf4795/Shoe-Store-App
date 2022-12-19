@@ -2,15 +2,21 @@ package com.example.android.shoestore.feature.main
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import com.example.android.shoestore.R
+import com.example.android.shoestore.base.PreferenceHelper
 import com.example.android.shoestore.databinding.ActivityMainBinding
+import com.example.android.shoestore.feature.login.data.LoginDataSource
+import com.example.android.shoestore.feature.shoe_list.ShoeDataSource
+import com.example.android.shoestore.feature.shoe_list.ShoeListRepository
 
 private const val WELCOME_FLOW_FLAG = "welcome_flow_flag_key"
 
@@ -21,17 +27,22 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+    private val mainViewModel: MainViewModel by viewModels<MainViewModel> {
+        initMainViewModelFactory()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-        navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_container) as NavHostFragment
+        navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_container) as NavHostFragment
         setContentView(binding.root)
         navController = navHostFragment.navController
 
         initViews()
-        //NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
-        //NavigationUI.setupWithNavController(binding.navView, navController)
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
+        NavigationUI.setupWithNavController(binding.navView, navController)
     }
 
     private fun initViews() {
@@ -55,4 +66,13 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
+
+    private fun initMainViewModelFactory() = MainViewModelFactory(
+        ShoeListRepository(
+            ShoeDataSource, LoginDataSource.getInstance(
+                PreferenceHelper(this.applicationContext)
+            )
+        )
+    )
+
 }
