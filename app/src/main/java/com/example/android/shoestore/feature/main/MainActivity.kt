@@ -1,24 +1,16 @@
 package com.example.android.shoestore.feature.main
 
-import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import com.example.android.shoestore.R
-import com.example.android.shoestore.base.SHOE_APP_PREF
 import com.example.android.shoestore.databinding.ActivityMainBinding
-import com.example.android.shoestore.feature.onboarding.OnBoardingActivity
 
 private const val WELCOME_FLOW_FLAG = "welcome_flow_flag_key"
 
