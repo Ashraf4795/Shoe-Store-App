@@ -5,7 +5,7 @@
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Register</string>
-    <string name="welcome">"Welcome, "</string>
+    <string name="welcome">Welcome</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
@@ -18,4 +18,9 @@
     <string name="back_button_desc">Back arrow to go back one screen</string>
     <string name="store_name">Ashraf Store</string>
     <string name="shoe_item_image">Shoe image</string>
+    <string name="onboarding1_text">Shopping within your finger.</string>
+    <string name="instruction_title_text">Your way of shopping shoes</string>
+    <string name="instructions_text">Select all your products and pay with your favorite payment option</string>
+    <string name="logout">Logout</string>
+    <string name="add_floating_button">Add button to add new shoe product item.</string>
 </resources>

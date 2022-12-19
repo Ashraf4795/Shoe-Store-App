@@ -7,11 +7,10 @@ import androidx.fragment.app.Fragment
 import com.aemerse.onboard.OnboardAdvanced
 import com.aemerse.onboard.OnboardFragment
 import com.example.android.shoestore.R
-import com.example.android.shoestore.feature.MainActivity
+import com.example.android.shoestore.base.SHOE_APP_PREF
+import com.example.android.shoestore.feature.main.MainActivity
 
-private const val SHOE_APP_PREF = "Shoe App preference"
 private const val FIRST_RUN = "first_run_ke"
-
 class OnBoardingActivity : OnboardAdvanced() {
     private lateinit var sharedPreferences: SharedPreferences
 
@@ -20,6 +19,39 @@ class OnBoardingActivity : OnboardAdvanced() {
         sharedPreferences = getSharedPreferences(SHOE_APP_PREF, MODE_PRIVATE)
 
         checkIfFirstOnBoardingLaunch()
+        addOnBoardingSlides()
+    }
+
+
+
+    private fun checkIfFirstOnBoardingLaunch() {
+        val isFirstOnBoardingLaunch = sharedPreferences.getBoolean(FIRST_RUN, true)
+        if (isFirstOnBoardingLaunch) {
+            sharedPreferences.edit().putBoolean(FIRST_RUN, false).apply()
+        } else {
+            navigateToShoeAppMainEntry()
+        }
+    }
+
+    override fun onSkipPressed(currentFragment: Fragment?) {
+        super.onSkipPressed(currentFragment)
+        navigateToShoeAppMainEntry()
+
+    }
+
+    override fun onDonePressed(currentFragment: Fragment?) {
+        super.onDonePressed(currentFragment)
+        navigateToShoeAppMainEntry()
+    }
+
+
+    private fun navigateToShoeAppMainEntry() {
+        val mainEntryIntent = Intent(this, MainActivity::class.java)
+        startActivity(mainEntryIntent)
+        finish()
+    }
+
+    private fun addOnBoardingSlides() {
         addSlide(
             OnboardFragment.newInstance(
                 title = "Welcome...",
@@ -48,32 +80,5 @@ class OnBoardingActivity : OnboardAdvanced() {
                 backgroundDrawable = R.drawable.onboarding_bg
             )
         )
-    }
-
-    private fun checkIfFirstOnBoardingLaunch() {
-        val isFirstOnBoardingLaunch = sharedPreferences.getBoolean(FIRST_RUN, true)
-        if (isFirstOnBoardingLaunch) {
-            sharedPreferences.edit().putBoolean(FIRST_RUN, false).apply()
-        } else {
-            navigateToShoeAppMainEntry()
-        }
-    }
-
-    override fun onSkipPressed(currentFragment: Fragment?) {
-        super.onSkipPressed(currentFragment)
-        navigateToShoeAppMainEntry()
-
-    }
-
-    override fun onDonePressed(currentFragment: Fragment?) {
-        super.onDonePressed(currentFragment)
-        navigateToShoeAppMainEntry()
-    }
-
-
-    private fun navigateToShoeAppMainEntry() {
-        val mainEntryIntent = Intent(this, MainActivity::class.java)
-        startActivity(mainEntryIntent)
-        finish()
     }
 }

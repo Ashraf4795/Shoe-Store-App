@@ -3,8 +3,9 @@ package com.example.android.shoestore.feature.shoe_list
 import com.example.android.shoestore.R
 import com.example.android.shoestore.feature.shoe_list.model.Shoe
 import kotlinx.coroutines.delay
+import javax.inject.Singleton
 
-class ShoeDataSource {
+object ShoeDataSource {
 
     private val listOfShoes = mutableListOf<Shoe>().apply {
         add(Shoe("Nike", "Fly to the moon", 220, R.drawable.shoe1, false ))

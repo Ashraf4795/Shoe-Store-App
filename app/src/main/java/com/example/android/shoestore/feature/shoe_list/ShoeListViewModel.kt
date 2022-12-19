@@ -12,7 +12,7 @@ import kotlinx.coroutines.withContext
 
 class ShoeListViewModel(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
-    private val repository: ShoeListRepository
+    private val shoeRepository: ShoeListRepository,
 ): ViewModel() {
 
     private val _shoeMutableLiveData: MutableLiveData<Result<List<Shoe>>> = MutableLiveData()
@@ -22,10 +22,16 @@ class ShoeListViewModel(
         viewModelScope.launch(dispatcher){
 
             _shoeMutableLiveData.postValue(Result.Loading("Loading Shoe List..."))
-            val shoeList = repository.getListOfShoes()
+            val shoeList = shoeRepository.getListOfShoes()
             withContext(Dispatchers.Main) {
                 _shoeMutableLiveData.value = Result.Success(data = shoeList)
             }
         }
+    }
+
+    fun isUserLoggedIn() = shoeRepository.isUserLoggedIn()
+
+    fun logout() {
+        shoeRepository.logout()
     }
 }

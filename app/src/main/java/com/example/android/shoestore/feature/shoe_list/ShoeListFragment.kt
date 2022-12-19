@@ -1,19 +1,19 @@
 package com.example.android.shoestore.feature.shoe_list
 
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModel
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.android.shoestore.R
 import com.example.android.shoestore.base.Result
+import com.example.android.shoestore.base.SHOE_APP_PREF
 import com.example.android.shoestore.databinding.FragmentShoeListBinding
 import com.example.android.shoestore.feature.shoe_list.model.Shoe
 
@@ -23,8 +23,12 @@ class ShoeListFragment : Fragment() {
     private lateinit var shoeListAdapter: ShoeListAdapter
     private lateinit var shoeListViewModel: ShoeListViewModel
     private lateinit var navController: NavController
+    private lateinit var preference: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        preference = this.requireActivity().getSharedPreferences(SHOE_APP_PREF, AppCompatActivity.MODE_PRIVATE)
+
     }
 
     override fun onCreateView(
@@ -39,11 +43,16 @@ class ShoeListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        shoeListViewModel = ViewModelProvider(this, ShoeListViewModelFactory())[ShoeListViewModel::class.java]
-        binding.headerId.back.setOnClickListener {
-            navController.navigateUp()
-        }
+        setHasOptionsMenu(true)
+        shoeListViewModel = ViewModelProvider(this, ShoeListViewModelFactory(requireActivity().applicationContext))[ShoeListViewModel::class.java]
         initObservers()
+        checkLoginState()
+    }
+
+    private fun checkLoginState() {
+        if (!shoeListViewModel.isUserLoggedIn()) {
+            navController.navigate(R.id.action_shoeListFragment_to_login_flow)
+        }
     }
 
     private fun initObservers() {
@@ -70,5 +79,18 @@ class ShoeListFragment : Fragment() {
             adapter = shoeListAdapter
             layoutManager = GridLayoutManager(this@ShoeListFragment.requireActivity(), 2)
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.logout_item) {
+            shoeListViewModel.logout()
+            navController.navigate(R.id.action_shoeListFragment_to_login_flow)
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.drawer_menu, menu)
     }
 }
