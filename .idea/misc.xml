@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/drawable/background_1.xml" value="0.202" />
+        <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/drawable/background_2.xml" value="0.1" />
+        <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/drawable/background_3.xml" value="0.1" />
+        <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/drawable/background_4.xml" value="0.1" />
         <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/drawable/cart_icon.xml" value="0.1305" />
         <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/drawable/clear.xml" value="0.1" />
         <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/drawable/favorite_icon.xml" value="0.185" />
@@ -21,6 +25,7 @@
         <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/layout/fragment_instruction.xml" value="0.33" />
         <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/layout/fragment_login.xml" value="0.2798913043478261" />
         <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/layout/fragment_on_boarding.xml" value="0.33" />
+        <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/layout/fragment_shoe_details.xml" value="0.37864583333333335" />
         <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/layout/fragment_shoe_list.xml" value="0.2611111111111111" />
         <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/layout/fragment_shoe_on_boarding.xml" value="0.10597826086956522" />
         <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/layout/header.xml" value="0.261025641025641" />

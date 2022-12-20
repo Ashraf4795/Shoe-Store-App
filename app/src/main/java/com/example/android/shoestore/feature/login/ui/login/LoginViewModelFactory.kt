@@ -7,10 +7,6 @@ import com.example.android.shoestore.base.PreferenceHelper
 import com.example.android.shoestore.feature.login.data.LoginDataSource
 import com.example.android.shoestore.feature.login.data.LoginRepository
 
-/**
- * ViewModel provider factory to instantiate LoginViewModel.
- * Required given LoginViewModel has a non-empty constructor
- */
 class LoginViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")

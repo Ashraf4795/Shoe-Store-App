@@ -22,14 +22,11 @@ import com.example.android.shoestore.databinding.FragmentLoginBinding
 import com.example.android.shoestore.feature.login.data.model.User
 import com.google.android.material.textfield.TextInputEditText
 
-private const val LOGIN_SUCCESSFUL: String = "LOGIN_SUCCESSFUL"
-
 class LoginFragment : Fragment() {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var binding: FragmentLoginBinding
     private lateinit var navController: NavController
-    private lateinit var savedStateHandle: SavedStateHandle
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +40,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initializeViewModel()
 
         initializeObservers(binding.login, binding.username, binding.password, binding.loading)
@@ -170,4 +168,5 @@ class LoginFragment : Fragment() {
     private fun showLoginFailed(@StringRes errorString: Int) {
         Toast.makeText(this.requireActivity(), errorString, Toast.LENGTH_LONG).show()
     }
+
 }

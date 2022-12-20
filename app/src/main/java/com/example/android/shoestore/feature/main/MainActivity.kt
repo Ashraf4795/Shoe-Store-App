@@ -2,17 +2,22 @@ package com.example.android.shoestore.feature.main
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.onNavDestinationSelected
 import com.example.android.shoestore.R
+import com.example.android.shoestore.base.PreferenceHelper
 import com.example.android.shoestore.databinding.ActivityMainBinding
-
-private const val WELCOME_FLOW_FLAG = "welcome_flow_flag_key"
+import com.example.android.shoestore.feature.login.data.LoginDataSource
+import com.example.android.shoestore.feature.shoe_list.ShoeDataSource
+import com.example.android.shoestore.feature.shoe_list.ShoeListRepository
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -20,6 +25,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var appBarConfiguration: AppBarConfiguration
+
+    private val mainViewModel: MainViewModel by viewModels {
+        initMainViewModelFactory()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +39,13 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         initViews()
-        //NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
-        //NavigationUI.setupWithNavController(binding.navView, navController)
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
+        NavigationUI.setupWithNavController(binding.navView, navController)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        checkLoginState()
     }
 
     private fun initViews() {
@@ -47,6 +61,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun checkLoginState() {
+        if (!mainViewModel.isUserLoggedIn()) {
+            navController.popBackStack()
+            navController.navigate(R.id.login_flow)
+        }
+    }
 
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp(drawerLayout)
@@ -55,4 +75,13 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return item.onNavDestinationSelected(navController) || super.onOptionsItemSelected(item)
     }
+
+    private fun initMainViewModelFactory() = MainViewModelFactory(
+        ShoeListRepository(
+            ShoeDataSource, LoginDataSource.getInstance(
+                PreferenceHelper(this.applicationContext)
+            )
+        )
+    )
+
 }
