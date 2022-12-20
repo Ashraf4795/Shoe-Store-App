@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">Shoe Store</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">ahmed.helmy@udacity.com</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Register</string>
+    <string name="welcome">Welcome</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="registration_required">"You Need to register first"</string>
+    <string name="home_item">Home</string>
+    <string name="profile_item">Profile</string>
+    <string name="cart_item">Cart</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="back_button_desc">Back arrow to go back one screen</string>
+    <string name="store_name">Ashraf Store</string>
+    <string name="shoe_item_image">Shoe image</string>
+    <string name="onboarding1_text">Shopping within your finger.</string>
+    <string name="instruction_title_text">Your way of shopping shoes</string>
+    <string name="instructions_text">Select all your products and pay with your favorite payment option</string>
+    <string name="logout">Logout</string>
+    <string name="add_floating_button">Add button to add new shoe product item.</string>
+    <string name="details_title">Enter Details</string>
+    <string name="shoe_edit_name_hint">Enter your shoe name</string>
+    <string name="shoe_name_label">Shoe Name</string>
+    <string name="shoe_company_label">Shoe Company</string>
+    <string name="shoe_edit_company_hint">Enter shoe company name</string>
+    <string name="shoe_size_label">What\'s your size</string>
+    <string name="shoe_edit_size_hint">i.e 46 EU</string>
+    <string name="shoe_description_label">Description</string>
+    <string name="shoe_edit_description_hint">describe your product</string>
+    <string name="save_button_label">Save</string>
+    <string name="cancel_button_label">Cancel</string>
 </resources>

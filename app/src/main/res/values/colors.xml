@@ -9,4 +9,13 @@
     <color name="white">#FFFFFFFF</color>
     <color name="light_grey">#F5F5F5</color>
     <color name="sea_blue">#42B1EF</color>
+    <color name="light_sea_blue">#B8E0F6</color>
+    <color name="green">#8BC34A</color>
+    <color name="light_green">#C0F482</color>
+    <color name="red">#FF7369</color>
+    <color name="light_red">#FFB2AC</color>
+    <color name="light_yellow">#FFE699</color>
+    <color name="yellow">#FBCA35</color>
 </resources>
+
+
