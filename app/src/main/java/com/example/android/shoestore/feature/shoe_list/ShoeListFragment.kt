@@ -68,6 +68,7 @@ class ShoeListFragment : Fragment() {
                     binding.shoeListLoader.visibility = View.VISIBLE
                 }
                 is Result.Error -> {
+                    showEmptyListView(true)
                     Toast.makeText(this.requireActivity(), "Failed", Toast.LENGTH_LONG).show()
                     binding.shoeListLoader.visibility = View.GONE
                 }
@@ -86,6 +87,7 @@ class ShoeListFragment : Fragment() {
     }
 
     private fun renderShoeList(data: List<Shoe>) {
+        showEmptyListView(data.isEmpty())
         shoeListAdapter = ShoeListAdapter(data)
         with(binding.shoeItemsListId) {
             adapter = shoeListAdapter
@@ -113,5 +115,10 @@ class ShoeListFragment : Fragment() {
             )
         )
     )
+
+    fun showEmptyListView(isShow: Boolean) {
+        binding.shoeItemsListId.visibility =  if (isShow) View.GONE else View.VISIBLE
+        binding.emptyListImageId.visibility =  if (isShow) View.VISIBLE else View.GONE
+    }
 
 }

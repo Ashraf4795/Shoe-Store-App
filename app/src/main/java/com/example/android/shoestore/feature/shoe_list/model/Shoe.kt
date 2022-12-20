@@ -1,7 +1,7 @@
 package com.example.android.shoestore.feature.shoe_list.model
 
-import com.example.android.shoestore.R
 import com.example.android.shoestore.feature.shoe_details.DetailsState
+import com.example.android.shoestore.feature.shoe_list.getRandomImage
 
 data class Shoe(
     val title: String,
@@ -20,7 +20,7 @@ data class Shoe(
                 detailsState.description,
                 detailsState.size,
                 (100..1000).random(),
-                R.drawable.shoe1,
+                getRandomImage(),
                 false
             )
         }

@@ -9,18 +9,14 @@ import com.example.android.shoestore.databinding.ShoeItemBinding
 import com.example.android.shoestore.feature.shoe_details.DetailsState
 import com.example.android.shoestore.feature.shoe_list.model.Shoe
 
-class ShoeListAdapter(private val shoeList: List<Shoe>): RecyclerView.Adapter<ShoeListAdapter.ShoeViewHolder>() {
+class ShoeListAdapter(shoeList: List<Shoe>): RecyclerView.Adapter<ShoeListAdapter.ShoeViewHolder>() {
 
     private val mutableShoeList: MutableList<Shoe> = shoeList.toMutableList()
 
     class ShoeViewHolder(private val binding: ShoeItemBinding):RecyclerView.ViewHolder(binding.root) {
         fun bind(shoeItem: Shoe) {
-            binding.shoeItemTitle.text = shoeItem.title
-            binding.shoeItemPrice.text = shoeItem.price.toString().plus("$")
-            binding.shoeItemDesc.text = shoeItem.description
+            binding.shoeItem = shoeItem
             binding.shoeImage.setImageResource(shoeItem.image)
-            binding.shoeItemContainer.background = getRandomGradient()
-            binding.shoeItemContainer.invalidate()
         }
     }
 
