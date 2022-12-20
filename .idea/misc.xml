@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/drawable/background_1.xml" value="0.202" />
+        <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/drawable/background_2.xml" value="0.1" />
+        <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/drawable/background_3.xml" value="0.1" />
+        <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/drawable/background_4.xml" value="0.1" />
         <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/drawable/cart_icon.xml" value="0.1305" />
         <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/drawable/clear.xml" value="0.1" />
         <entry key="..\:/work_space/Android_Dojo/Advance_Android_kotlin_Nanodegree/ShoeStore/app/src/main/res/drawable/favorite_icon.xml" value="0.185" />

@@ -19,8 +19,6 @@ import com.example.android.shoestore.feature.login.data.LoginDataSource
 import com.example.android.shoestore.feature.shoe_list.ShoeDataSource
 import com.example.android.shoestore.feature.shoe_list.ShoeListRepository
 
-private const val WELCOME_FLOW_FLAG = "welcome_flow_flag_key"
-
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -28,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    private val mainViewModel: MainViewModel by viewModels<MainViewModel> {
+    private val mainViewModel: MainViewModel by viewModels {
         initMainViewModelFactory()
     }
 
@@ -36,8 +34,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-        navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_container) as NavHostFragment
+        navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_container) as NavHostFragment
         setContentView(binding.root)
         navController = navHostFragment.navController
 

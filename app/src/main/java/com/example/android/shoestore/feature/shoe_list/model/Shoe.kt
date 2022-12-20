@@ -2,7 +2,6 @@ package com.example.android.shoestore.feature.shoe_list.model
 
 import com.example.android.shoestore.R
 import com.example.android.shoestore.feature.shoe_details.DetailsState
-import kotlin.random.Random
 
 data class Shoe(
     val title: String,
@@ -20,7 +19,7 @@ data class Shoe(
                 detailsState.company,
                 detailsState.description,
                 detailsState.size,
-                Random(1000).nextInt(100, 900),
+                (100..1000).random(),
                 R.drawable.shoe1,
                 false
             )

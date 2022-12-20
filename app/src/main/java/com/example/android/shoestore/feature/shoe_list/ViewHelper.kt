@@ -19,7 +19,7 @@ val gradients = listOf(
     GradientDrawable(
         GradientDrawable.Orientation.TL_BR,
         intArrayOf(0x42B1EF, 0xFFCB12)
-    )
+    ),
 )
 
 

@@ -32,8 +32,6 @@ class LoginDataSource(private val preferenceHelper: PreferenceHelper) {
     suspend fun login(user: User): Result<User> {
         delay(1500)
         try {
-            //if (checkUserInMemory(user)) return Result.Success(stubUser!!)
-
             val cachedUser = preferenceHelper.getCachedUser()
 
             if (cachedUser == null) {
@@ -54,13 +52,6 @@ class LoginDataSource(private val preferenceHelper: PreferenceHelper) {
         } catch (e: Throwable) {
             return Result.Error(R.string.login_failed, LoginException("Error logging in"))
         }
-    }
-
-    private fun checkUserInMemory(user: User): Boolean {
-        if (stubUser != null) {
-            return true
-        }
-        return false
     }
 
     suspend fun register(user: User): Result<User> {

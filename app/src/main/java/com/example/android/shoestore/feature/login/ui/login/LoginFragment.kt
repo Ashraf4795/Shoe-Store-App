@@ -22,8 +22,6 @@ import com.example.android.shoestore.databinding.FragmentLoginBinding
 import com.example.android.shoestore.feature.login.data.model.User
 import com.google.android.material.textfield.TextInputEditText
 
-private const val LOGIN_SUCCESSFUL: String = "LOGIN_SUCCESSFUL"
-
 class LoginFragment : Fragment() {
 
     private lateinit var loginViewModel: LoginViewModel
@@ -141,8 +139,7 @@ class LoginFragment : Fragment() {
             }
             loginResult.success?.let {
                 updateUiWithUser(it)
-                navController.popBackStack()
-                navController.navigate(R.id.shoeListFragment)
+                navController.navigate(R.id.action_loginFragment_to_onBoardingFragment)
             }
         }
 

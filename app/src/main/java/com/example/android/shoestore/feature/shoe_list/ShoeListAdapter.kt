@@ -11,27 +11,16 @@ import com.example.android.shoestore.feature.shoe_list.model.Shoe
 
 class ShoeListAdapter(private val shoeList: List<Shoe>): RecyclerView.Adapter<ShoeListAdapter.ShoeViewHolder>() {
 
-    companion object {
-        var counter = 0
-    }
-    init {
-        Log.d("main", "${++counter}")
-    }
     private val mutableShoeList: MutableList<Shoe> = shoeList.toMutableList()
 
     class ShoeViewHolder(private val binding: ShoeItemBinding):RecyclerView.ViewHolder(binding.root) {
-        companion object {
-            var counter = 0
-        }
-        init {
-            Log.d("main", "viewHolder ${++counter}")
-        }
         fun bind(shoeItem: Shoe) {
             binding.shoeItemTitle.text = shoeItem.title
             binding.shoeItemPrice.text = shoeItem.price.toString().plus("$")
             binding.shoeItemDesc.text = shoeItem.description
             binding.shoeImage.setImageResource(shoeItem.image)
             binding.shoeItemContainer.background = getRandomGradient()
+            binding.shoeItemContainer.invalidate()
         }
     }
 

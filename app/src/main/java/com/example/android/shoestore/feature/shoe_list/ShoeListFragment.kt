@@ -96,8 +96,7 @@ class ShoeListFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.logout_item) {
             mainViewModel.logout()
-            navController.popBackStack()
-            navController.navigate(R.id.login_flow)
+            navController.navigate(R.id.logout)
         }
         return super.onOptionsItemSelected(item)
     }

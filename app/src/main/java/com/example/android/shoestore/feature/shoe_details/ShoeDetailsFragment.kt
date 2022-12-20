@@ -14,15 +14,10 @@ import com.example.android.shoestore.feature.main.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class ShoeDetailsFragment : Fragment() {
+
     private lateinit var binding: FragmentShoeDetailsBinding
     private lateinit var navController: NavController
-
     private val mainViewModel: MainViewModel by activityViewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
