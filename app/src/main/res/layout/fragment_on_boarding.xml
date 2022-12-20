@@ -7,6 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".feature.onboarding.OnBoardingFragment">
 
+    <!--Welcome label-->
     <TextView
         android:id="@+id/welcome_textview_id"
         android:layout_width="match_parent"
@@ -23,6 +24,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
+    <!--Animated view-->
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie_main"
         android:layout_width="match_parent"
@@ -36,6 +39,8 @@
         app:lottie_loop="true"
         app:lottie_speed="1" />
 
+
+    <!--on boarding message-->
     <TextView
         android:id="@+id/onboarding_textview_id"
         android:layout_width="0dp"
@@ -53,6 +58,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
+    <!-- button to navigate to next screen-->
     <ImageButton
         android:id="@+id/onboarding_next_button_id"
         android:layout_width="wrap_content"
