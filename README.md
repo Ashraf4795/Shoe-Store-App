@@ -24,7 +24,3 @@ List out the steps
 2- check out develop branch if not checked.
 3- click run button.
 
-
-![Screenshot 0](screenshots/login.png) ![Screenshot 1](screenshots/welcome.png) ![Screenshot 2](screenshots/instruction.png)
-![Screenshot 3](screenshots/shoelist.png) ![Screenshot 4](screenshots/details.png)
-
