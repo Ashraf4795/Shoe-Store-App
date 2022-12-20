@@ -1,26 +1,14 @@
 package com.example.android.shoestore.feature.shoe_list
 
-import android.graphics.drawable.GradientDrawable
+import com.example.android.shoestore.R
+import kotlin.random.Random
+import kotlin.random.nextInt
 
-
-val gradients = listOf(
-    GradientDrawable(
-        GradientDrawable.Orientation.TL_BR,
-        intArrayOf(0x42B1EF, 0x08A6FF)
-    ),
-    GradientDrawable(
-        GradientDrawable.Orientation.TL_BR,
-        intArrayOf(0xF7F98D, 0xECEF42)
-    ),
-    GradientDrawable(
-        GradientDrawable.Orientation.TL_BR,
-        intArrayOf(0xFEA8E6, 0xFC64D1)
-    ),
-    GradientDrawable(
-        GradientDrawable.Orientation.TL_BR,
-        intArrayOf(0x42B1EF, 0xFFCB12)
-    ),
+val shoeList = listOf(
+    R.drawable.shoe1,
+    R.drawable.shoe2,
+    R.drawable.shoe3,
+    R.drawable.shoe4,
 )
 
-
-fun getRandomGradient() = gradients.random()
+fun getRandomImage() = shoeList.random()
