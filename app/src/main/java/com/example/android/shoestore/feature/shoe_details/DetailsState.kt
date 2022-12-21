@@ -1,11 +1,15 @@
 package com.example.android.shoestore.feature.shoe_details
 
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
+
 data class DetailsState(
+    @Bindable()
     val name: String,
     val company: String,
     val size: String,
     val description: String,
-) {
+): BaseObservable() {
     enum class Element(val message: String){
         NAME("Name not valid, should be more than 3 letters"),
         COMPANY("Company not valid, enter company name."),

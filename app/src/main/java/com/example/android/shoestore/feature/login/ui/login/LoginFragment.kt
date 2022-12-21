@@ -13,14 +13,12 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.android.shoestore.R
 import com.example.android.shoestore.databinding.FragmentLoginBinding
 import com.example.android.shoestore.feature.login.data.model.User
-import com.google.android.material.textfield.TextInputEditText
 
 class LoginFragment : Fragment() {
 
@@ -43,21 +41,21 @@ class LoginFragment : Fragment() {
 
         initializeViewModel()
 
-        initializeObservers(binding.login, binding.username, binding.password, binding.loading)
+        initializeObservers(binding.login, binding.username as EditText, binding.password, binding.loading)
 
-        registerLoginFieldsTextWatchers(binding.username, binding.password)
+        registerLoginFieldsTextWatchers(binding.username as EditText, binding.password)
 
         registerClickListeners(
             binding.login,
             binding.loading,
-            binding.username,
+            binding.username as EditText,
             binding.password,
             binding.register
         )
     }
 
     private fun registerLoginFieldsTextWatchers(
-        usernameEditText: TextInputEditText,
+        usernameEditText: EditText,
         passwordEditText: EditText
     ) {
         val afterTextChangedListener = object : TextWatcher {
@@ -89,7 +87,7 @@ class LoginFragment : Fragment() {
     private fun registerClickListeners(
         loginButton: Button,
         loadingProgressBar: ProgressBar,
-        usernameEditText: TextInputEditText,
+        usernameEditText: EditText,
         passwordEditText: EditText,
         registerButton: Button
     ) {
@@ -114,7 +112,7 @@ class LoginFragment : Fragment() {
 
     private fun initializeObservers(
         loginButton: Button,
-        usernameEditText: TextInputEditText,
+        usernameEditText: EditText,
         passwordEditText: EditText,
         loadingProgressBar: ProgressBar
     ) {

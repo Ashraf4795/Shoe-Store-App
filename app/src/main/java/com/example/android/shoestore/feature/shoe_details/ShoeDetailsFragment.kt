@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.example.android.shoestore.R
 import com.example.android.shoestore.databinding.FragmentShoeDetailsBinding
 import com.example.android.shoestore.feature.main.MainViewModel
+import com.example.android.shoestore.feature.shoe_list.getRandomImage
+import com.example.android.shoestore.feature.shoe_list.model.Shoe
 import com.google.android.material.snackbar.Snackbar
 
 class ShoeDetailsFragment : Fragment() {
@@ -18,49 +20,24 @@ class ShoeDetailsFragment : Fragment() {
     private lateinit var binding: FragmentShoeDetailsBinding
     private lateinit var navController: NavController
     private val mainViewModel: MainViewModel by activityViewModels()
+    private val shoeDetailsObservable: ShoeDetailsObservable by lazy { ShoeDetailsObservable(onSave = {onSaveClicked(it)}, onCancel = {onCancelClicked()})}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentShoeDetailsBinding.inflate(inflater)
-        navController = findNavController()
 
-        initClickListeners()
+        binding = FragmentShoeDetailsBinding.inflate(inflater)
+        binding.shoeDetails = shoeDetailsObservable
+
+        navController = findNavController()
 
         return binding.root
     }
 
-
-    private fun initClickListeners() {
-        binding.saveDetailsId.setOnClickListener {
-            onSaveClicked()
-        }
-
-        binding.cancelDetailsChageId.setOnClickListener {
-            onCancelClicked()
-        }
-    }
-
-    private fun onSaveClicked() {
-        val details = collectDetails()
-        val detailsValidity = details.checkValues()
-
-        if ( detailsValidity != DetailsState.Element.VALID) {
-            showMessage(detailsValidity.message)
-        } else {
-            mainViewModel.shareShoeDetails(details)
-            navController.popBackStack()
-        }
-    }
-
-    private fun collectDetails(): DetailsState {
-        return DetailsState(
-            binding.shoeNameEditId.text.toString(),
-            binding.shoeCompanyEditId.text.toString(),
-            binding.shoeSizeEditId.text.toString(),
-            binding.shoeDescriptionEditId.text.toString(),
-        )
+    private fun onSaveClicked(shoe: Shoe) {
+        mainViewModel.shareShoeDetails(shoe)
+        navController.popBackStack()
     }
 
     private fun onCancelClicked() {
