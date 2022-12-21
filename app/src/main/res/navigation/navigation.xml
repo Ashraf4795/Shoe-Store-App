@@ -21,8 +21,12 @@
         <action
             android:id="@+id/logout"
             app:destination="@id/login_flow"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
             app:popUpTo="@id/shoeListFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
     <navigation android:id="@+id/login_flow"
         app:startDestination="@id/loginFragment">
