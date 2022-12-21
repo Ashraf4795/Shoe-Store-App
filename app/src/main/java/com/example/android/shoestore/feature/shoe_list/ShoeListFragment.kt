@@ -3,21 +3,18 @@ package com.example.android.shoestore.feature.shoe_list
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
-import androidx.recyclerview.widget.GridLayoutManager
 import com.example.android.shoestore.R
 import com.example.android.shoestore.base.PreferenceHelper
 import com.example.android.shoestore.base.Result
 import com.example.android.shoestore.base.SHOE_APP_PREF
 import com.example.android.shoestore.databinding.FragmentShoeListBinding
+import com.example.android.shoestore.databinding.ShoeItemBinding
 import com.example.android.shoestore.feature.login.data.LoginDataSource
 import com.example.android.shoestore.feature.main.MainViewModel
 import com.example.android.shoestore.feature.main.MainViewModelFactory
@@ -26,8 +23,7 @@ import com.example.android.shoestore.feature.shoe_list.model.Shoe
 class ShoeListFragment : Fragment() {
 
     private lateinit var binding: FragmentShoeListBinding
-    private lateinit var shoeListAdapter: ShoeListAdapter
-    private val mainViewModel: MainViewModel by activityViewModels<MainViewModel> {
+    private val mainViewModel: MainViewModel by activityViewModels {
         initMainViewModelFactory()
     }
     private lateinit var navController: NavController
@@ -58,7 +54,7 @@ class ShoeListFragment : Fragment() {
 
 
     private fun initObservers() {
-        mainViewModel.shoeLiveData.observe(this.viewLifecycleOwner) { result ->
+        mainViewModel.addingNewShoeState.observe(this.viewLifecycleOwner) { result ->
             when(result) {
                 is Result.Success -> {
                     renderShoeList(result.data)
@@ -74,10 +70,6 @@ class ShoeListFragment : Fragment() {
                 }
             }
         }
-
-        mainViewModel.detailsState.observe(this.viewLifecycleOwner) {
-            shoeListAdapter.updateShoeList(it)
-        }
     }
 
     private fun initClickListener() {
@@ -86,12 +78,15 @@ class ShoeListFragment : Fragment() {
         }
     }
 
-    private fun renderShoeList(data: List<Shoe>) {
-        showEmptyListView(data.isEmpty())
-        shoeListAdapter = ShoeListAdapter(data)
-        with(binding.shoeItemsListId) {
-            adapter = shoeListAdapter
-            layoutManager = GridLayoutManager(this@ShoeListFragment.requireActivity(), 2)
+    private fun renderShoeList(shoes: List<Shoe>) {
+        if (shoes.isEmpty()) {
+            showEmptyListView(true)
+        }
+        for (shoe in shoes) {
+            val shoeItemBinding = ShoeItemBinding.inflate(layoutInflater)
+            shoeItemBinding.shoeItem = shoe
+            binding.shoeItemsListId.addView(shoeItemBinding.root)
+            showEmptyListView(false)
         }
     }
 

@@ -1,6 +1,6 @@
 package com.example.android.shoestore.feature.main
 
-import android.util.Log
+import androidx.databinding.Bindable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,18 +19,16 @@ class MainViewModel(
     private val shoeRepository: ShoeListRepository,
 ) : ViewModel() {
 
-    private val _shoeMutableLiveData: MutableLiveData<Result<List<Shoe>>> = MutableLiveData()
-    val shoeLiveData = _shoeMutableLiveData
-    private val _detailsState: MutableLiveData<DetailsState> = MutableLiveData<DetailsState>()
-    val detailsState: LiveData<DetailsState> = _detailsState
+
+    private val _addingNewShoeState: MutableLiveData<Result<List<Shoe>>> = MutableLiveData<Result<List<Shoe>>>()
+    val addingNewShoeState: LiveData<Result<List<Shoe>>> = _addingNewShoeState
 
     init {
         viewModelScope.launch(dispatcher){
-
-            _shoeMutableLiveData.postValue(Result.Loading("Loading Shoe List..."))
             val shoeList = shoeRepository.getListOfShoes()
+            _addingNewShoeState.postValue(Result.Loading("Loading..."))
             withContext(Dispatchers.Main) {
-                _shoeMutableLiveData.value = Result.Success(data = shoeList)
+                _addingNewShoeState.value = Result.Success(data = shoeList)
             }
         }
     }
@@ -40,10 +38,8 @@ class MainViewModel(
     fun logout() {
         shoeRepository.logout()
     }
-    fun shareShoeDetails(details: DetailsState) {
-        shoeRepository.addShoe(Shoe.createCopy(details))
-        _detailsState.value = details
+    fun shareShoeDetails(shoe: Shoe) {
+        _addingNewShoeState.value = Result.Success(shoeRepository.addShoe(shoe))
     }
-
-
+    
 }
